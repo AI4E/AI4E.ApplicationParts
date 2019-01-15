@@ -1,4 +1,4 @@
-﻿/* License
+/* License
  * --------------------------------------------------------------------------------------------------------------------
  * This file is part of the AI4E distribution.
  *   (https://github.com/AI4E/AI4E)
@@ -156,7 +156,7 @@ namespace AI4E.ApplicationParts
             return _inner.GetEnumerator();
         }
 
-        public event System.EventHandler CollectionChanged;
+        public event EventHandler CollectionChanged;
 
         private void OnCollectionChanged()
         {

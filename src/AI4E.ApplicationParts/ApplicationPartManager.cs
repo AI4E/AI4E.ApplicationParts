@@ -73,11 +73,13 @@ namespace AI4E.ApplicationParts
         /// </summary>
         public IList<ApplicationPart> ApplicationParts => _applicationParts;
 
-        public event System.EventHandler ApplicationPartsChanged;
+        public event EventHandler ApplicationPartsChanged;
 
         private void OnApplicationPartsChanged()
         {
             ApplicationPartsChanged?.Invoke(this, EventArgs.Empty);
+
+            Console.WriteLine("Application parts changed.");
         }
 
         /// <summary>

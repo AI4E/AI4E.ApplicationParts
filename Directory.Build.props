@@ -28,11 +28,11 @@
 
   <PropertyGroup>
     <SystemCollectionsImmutableVersion Condition="'$(SystemCollectionsImmutableVersion)' == ''">1.5.0</SystemCollectionsImmutableVersion>
-    <MicrosoftExtensionsDependencyInjectionAbstractionsVersion Condition="'$(MicrosoftExtensionsDependencyInjectionAbstractionsVersion)' == ''">2.1.1</MicrosoftExtensionsDependencyInjectionAbstractionsVersion>
+    <MicrosoftExtensionsDependencyInjectionAbstractionsVersion Condition="'$(MicrosoftExtensionsDependencyInjectionAbstractionsVersion)' == ''">2.2.0</MicrosoftExtensionsDependencyInjectionAbstractionsVersion>
     <MicrosoftExtensionsDependencyModelVersion Condition="'$(MicrosoftExtensionsDependencyModelVersion)' == ''">2.1.0</MicrosoftExtensionsDependencyModelVersion>
   </PropertyGroup>
 
   <PropertyGroup>
-    <MicrosoftAspNetCoreAppVersion Condition="'$(MicrosoftAspNetCoreAppVersion)' == ''">2.1.5</MicrosoftAspNetCoreAppVersion>  
+    <MicrosoftAspNetCoreAppVersion Condition="'$(MicrosoftAspNetCoreAppVersion)' == ''">2.2.1</MicrosoftAspNetCoreAppVersion>  
   </PropertyGroup>
 </Project>
