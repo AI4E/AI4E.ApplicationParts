@@ -78,8 +78,6 @@ namespace AI4E.ApplicationParts
         private void OnApplicationPartsChanged()
         {
             ApplicationPartsChanged?.Invoke(this, EventArgs.Empty);
-
-            Console.WriteLine("Application parts changed.");
         }
 
         /// <summary>
