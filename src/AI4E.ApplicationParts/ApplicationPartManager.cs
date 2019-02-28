@@ -76,6 +76,7 @@ namespace AI4E.ApplicationParts
         /// </summary>
         public IList<ApplicationPart> ApplicationParts => _applicationParts;
 
+        [Obsolete]
         public event EventHandler ApplicationPartsChanged;
 
         private void OnApplicationPartsChanged()
