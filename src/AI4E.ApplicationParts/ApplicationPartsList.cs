@@ -1,7 +1,7 @@
 /* License
  * --------------------------------------------------------------------------------------------------------------------
  * This file is part of the AI4E distribution.
- *   (https://github.com/AI4E/AI4E)
+ *   (https://github.com/AI4E/AI4E.ApplicationParts)
  * Copyright (c) 2018 Andreas Truetschel and contributors.
  * 
  * AI4E is free software: you can redistribute it and/or modify  

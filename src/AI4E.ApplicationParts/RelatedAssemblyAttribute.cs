@@ -1,7 +1,7 @@
-﻿/* License
+/* License
  * --------------------------------------------------------------------------------------------------------------------
  * This file is part of the AI4E distribution.
- *   (https://github.com/AI4E/AI4E)
+ *   (https://github.com/AI4E/AI4E.ApplicationParts)
  * Copyright (c) 2018 Andreas Truetschel and contributors.
  * 
  * AI4E is free software: you can redistribute it and/or modify  
@@ -19,22 +19,22 @@
  */
 
 /* Based on
-* --------------------------------------------------------------------------------------------------------------------
-* Asp.Net Core MVC
-* Copyright (c) .NET Foundation. All rights reserved.
-*
-* Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-* these files except in compliance with the License. You may obtain a copy of the
-* License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software distributed
-* under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
-* CONDITIONS OF ANY KIND, either express or implied. See the License for the
-* specific language governing permissions and limitations under the License.
-* --------------------------------------------------------------------------------------------------------------------
-*/
+ * --------------------------------------------------------------------------------------------------------------------
+ * Asp.Net Core MVC
+ * Copyright (c) .NET Foundation. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+ * these files except in compliance with the License. You may obtain a copy of the
+ * License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * --------------------------------------------------------------------------------------------------------------------
+ */
 
 using System;
 using System.Collections.Generic;
@@ -122,7 +122,7 @@ namespace AI4E.ApplicationParts
                 if (string.Equals(assemblyName, attribute.AssemblyFileName, StringComparison.OrdinalIgnoreCase))
                 {
                     throw new InvalidOperationException(
-                        string.Format("{0} specified on {1} cannot be self referential.", nameof(RelatedAssemblyAttribute), assemblyName));
+                       string.Format("{0} specified on {1} cannot be self referential.", nameof(RelatedAssemblyAttribute), assemblyName));
                 }
 
                 var relatedAssemblyLocation = Path.Combine(assemblyDirectory, attribute.AssemblyFileName + ".dll");
@@ -131,8 +131,7 @@ namespace AI4E.ApplicationParts
                     if (throwOnError)
                     {
                         throw new FileNotFoundException(
-                            string.Format("Related assembly '{0}' specified by assembly '{1}' could not be found in the directory {2}. Related assemblies must be co-located with the specifying assemblies.",
-                                          attribute.AssemblyFileName, assemblyName, assemblyDirectory),
+                            string.Format("Related assembly '{0}' specified by assembly '{1}' could not be found in the directory {2}. Related assemblies must be co-located with the specifying assemblies.", attribute.AssemblyFileName, assemblyName, assemblyDirectory),
                             relatedAssemblyLocation);
                     }
                     else
@@ -150,7 +149,8 @@ namespace AI4E.ApplicationParts
 
         internal static string GetAssemblyLocation(Assembly assembly)
         {
-            if (Uri.TryCreate(assembly.CodeBase, UriKind.Absolute, out var result) && result.IsFile)
+            if (Uri.TryCreate(assembly.CodeBase, UriKind.Absolute, out var result) &&
+                result.IsFile && string.IsNullOrWhiteSpace(result.Fragment))
             {
                 return result.LocalPath;
             }

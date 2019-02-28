@@ -1,7 +1,7 @@
-﻿/* License
+/* License
  * --------------------------------------------------------------------------------------------------------------------
  * This file is part of the AI4E distribution.
- *   (https://github.com/AI4E/AI4E)
+ *   (https://github.com/AI4E/AI4E.ApplicationParts)
  * Copyright (c) 2018 Andreas Truetschel and contributors.
  * 
  * AI4E is free software: you can redistribute it and/or modify  
@@ -19,22 +19,22 @@
  */
 
 /* Based on
-* --------------------------------------------------------------------------------------------------------------------
-* Asp.Net Core MVC
-* Copyright (c) .NET Foundation. All rights reserved.
-*
-* Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-* these files except in compliance with the License. You may obtain a copy of the
-* License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software distributed
-* under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
-* CONDITIONS OF ANY KIND, either express or implied. See the License for the
-* specific language governing permissions and limitations under the License.
-* --------------------------------------------------------------------------------------------------------------------
-*/
+ * --------------------------------------------------------------------------------------------------------------------
+ * Asp.Net Core MVC
+ * Copyright (c) .NET Foundation. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+ * these files except in compliance with the License. You may obtain a copy of the
+ * License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ * --------------------------------------------------------------------------------------------------------------------
+ */
 
 using Microsoft.Extensions.DependencyModel;
 using System;
@@ -48,10 +48,10 @@ namespace AI4E.ApplicationParts
     {
         internal static HashSet<string> ReferenceAssemblies { get; } = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
-            // The deps file for the Microsoft.AspNetCore.All shared runtime is authored in a way where it does not say
+            // The deps file for the Microsoft.AspNetCore.App shared runtime is authored in a way where it does not say
             // it depends on Microsoft.AspNetCore.Mvc even though it does. Explicitly list it so that referencing this runtime causes
             // assembly discovery to work correctly.
-            "Microsoft.AspNetCore.All",
+            "Microsoft.AspNetCore.App",
             "Microsoft.AspNetCore.Mvc",
             "Microsoft.AspNetCore.Mvc.Abstractions",
             "Microsoft.AspNetCore.Mvc.ApiExplorer",
@@ -61,8 +61,8 @@ namespace AI4E.ApplicationParts
             "Microsoft.AspNetCore.Mvc.Formatters.Json",
             "Microsoft.AspNetCore.Mvc.Formatters.Xml",
             "Microsoft.AspNetCore.Mvc.Localization",
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson",
             "Microsoft.AspNetCore.Mvc.Razor",
-            "Microsoft.AspNetCore.Mvc.Razor.Extensions",
             "Microsoft.AspNetCore.Mvc.RazorPages",
             "Microsoft.AspNetCore.Mvc.TagHelpers",
             "Microsoft.AspNetCore.Mvc.ViewFeatures",
@@ -112,10 +112,7 @@ namespace AI4E.ApplicationParts
             }
         }
 
-        protected virtual DependencyContext LoadDependencyContext(Assembly assembly)
-        {
-            return DependencyContext.Load(assembly);
-        }
+        protected virtual DependencyContext LoadDependencyContext(Assembly assembly) => DependencyContext.Load(assembly);
 
         private List<AssemblyItem> ResolveFromDependencyContext(DependencyContext dependencyContext)
         {
@@ -178,7 +175,7 @@ namespace AI4E.ApplicationParts
                 if (relatedAssembly.IsDefined(typeof(RelatedAssemblyAttribute)))
                 {
                     throw new InvalidOperationException(
-                        string.Format("Assembly '{0}' declared as a related assembly by assembly '{1}' cannot define additional related assemblies.", relatedAssembly.FullName, assembly.FullName));
+                       string.Format("Assembly '{0}' declared as a related assembly by assembly '{1}' cannot define additional related assemblies.", relatedAssembly.FullName, assembly.FullName));
                 }
             }
 
@@ -191,7 +188,7 @@ namespace AI4E.ApplicationParts
         // Internal for unit testing
         internal static IEnumerable<RuntimeLibrary> GetCandidateLibraries(DependencyContext dependencyContext)
         {
-            // When using Microsoft.AspNetCore.App \ Microsoft.AspNetCore.All shared runtimes, entries in the RuntimeLibraries
+            // When using the Microsoft.AspNetCore.App shared runtimes, entries in the RuntimeLibraries
             // get "erased" and it is no longer accurate to query to determine a library's dependency closure.
             // We'll use CompileLibraries to calculate the dependency graph and runtime library to resolve assemblies to inspect.
             var candidatesResolver = new CandidateResolver(dependencyContext.CompileLibraries, ReferenceAssemblies);

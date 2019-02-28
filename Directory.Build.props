@@ -2,6 +2,18 @@
   <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" Condition="exists($([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../')))" />
 
   <PropertyGroup>
+    <Authors>Andreas Trütschel and contributors</Authors>
+    <Product>$(ProjectName)</Product>
+    <Copyright>Copyright (c) Andreas Trütschel and contributors.</Copyright>
+    <PackageLicenseUrl>https://github.com/AI4E/AI4E.ApplicationParts/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/AI4E/AI4E.ApplicationParts</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/AI4E/AI4E.ApplicationParts</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <IncludeSymbols>true</IncludeSymbols>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <RepositoryRoot Condition="'$(RepositoryRoot)' == ''">$(MSBuildThisFileDirectory)</RepositoryRoot>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <LangVersion>latest</LangVersion>
@@ -25,14 +37,9 @@
     <MSBuildProjectExtensionsPath>$(BaseIntermediateOutputPath)</MSBuildProjectExtensionsPath>
     <RestoreOutputPath>$(BaseIntermediateOutputPath)</RestoreOutputPath>
   </PropertyGroup>
-
+  
   <PropertyGroup>
-    <SystemCollectionsImmutableVersion Condition="'$(SystemCollectionsImmutableVersion)' == ''">1.5.0</SystemCollectionsImmutableVersion>
-    <MicrosoftExtensionsDependencyInjectionAbstractionsVersion Condition="'$(MicrosoftExtensionsDependencyInjectionAbstractionsVersion)' == ''">2.2.0</MicrosoftExtensionsDependencyInjectionAbstractionsVersion>
-    <MicrosoftExtensionsDependencyModelVersion Condition="'$(MicrosoftExtensionsDependencyModelVersion)' == ''">2.1.0</MicrosoftExtensionsDependencyModelVersion>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <MicrosoftAspNetCoreAppVersion Condition="'$(MicrosoftAspNetCoreAppVersion)' == ''">2.2.1</MicrosoftAspNetCoreAppVersion>  
+    <NetStandardVersion>netstandard2.0</NetStandardVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 </Project>
